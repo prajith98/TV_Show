@@ -2,6 +2,9 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.Random;
+import java.net.*;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 public class TV_Shows  extends JFrame implements ActionListener
 {
     JTextField ans;
@@ -70,7 +73,7 @@ public class TV_Shows  extends JFrame implements ActionListener
         return x;
     }
     TV_Shows(int q[],int s,int z)
-    {
+    {   try{
         for(int i=0;i<30;i++)
             c[i]=q[i];
         this.score=s;
@@ -84,8 +87,9 @@ public class TV_Shows  extends JFrame implements ActionListener
         setResizable(false);
         JPanel p=new JPanel(); 
         String TV_SHOW;
-        ImageIcon Q=new ImageIcon("C:\\Users\\Prajith Nair\\Desktop\\Stuff\\SEM-6\\Python Project\\Back.png");
-        JLabel J=new JLabel(Q);
+        URL url_back = new URL("https://i.ibb.co/MCyqcFn/Back.png");
+        Image Q=ImageIO.read(url_back.openStream());
+        JLabel J=new JLabel(new ImageIcon(Q));
         TV_SHOW=scramble();
         if(TV_SHOW=="null")
             this.n=0;
@@ -112,6 +116,8 @@ public class TV_Shows  extends JFrame implements ActionListener
         setVisible(true);
         this.getRootPane().setDefaultButton(Next);
         Next.addActionListener(this);
+        }
+        catch(Exception e){}
     }
     void calculate(String s)
     {
